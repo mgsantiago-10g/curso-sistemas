@@ -35,7 +35,7 @@
 
 	function create( $connection, $data )
 	{
-		/*if ( isValidUserData( $data ) )
+		if ( isValidUserData( $data ) )
 		{
 			try
 			{
@@ -53,9 +53,9 @@
 			}
 		}
 		else
-		{*/
+		{
 			return array( status=>'error', description=>'Los datos del usuario no cumplen con la especificación requerida.' );
-		//}
+		}
 	} 
 
 	function edit( $connection, $data )
