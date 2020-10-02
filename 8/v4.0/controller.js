@@ -49,7 +49,7 @@ class UserViewController
 		//Validaciones tempranas (Cliente)
 		let success = true;
 
-		if ( this.innerModel.isValidUserData( formUserData ) )
+		if ( !this.innerModel.isValidUserData( formUserData ) )
 		{
 			window.alert("ClientError: Los datos del usuario no cumplen con la especificación requerida.");
 			success = false;
@@ -61,13 +61,14 @@ class UserViewController
 			//Modelo es asincrónico, al final de la cadena se chequea si hubo errores.
 			this.innerModel.create( formUserData )
 			.then( response => response.json() )
-			.then( response => {if (response.hasOwnProperty('status')) window.alert("ServerError: " + response.description )} )
+			.then( response => {if ( response != null && response.hasOwnProperty('status') ) window.alert("ServerError: " + response.description )} )
 			.then( () => this.innerView.update() );
 		}
 		
 
 		//Ocultar el modal
 		document.getElementById('id01').style.display='none';
+		//this.innerView.hideNewUserModal();
 	}
 
 	onNewUserCancelButtonClick()

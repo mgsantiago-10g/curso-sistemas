@@ -100,7 +100,10 @@ class RemoteModel extends EventTarget
 
 		success = ( success && userData.hasOwnProperty('username') && userData.username != null );
 		success = ( success && userData.hasOwnProperty('name') && userData.name != null );
-		success = ( success && userData.hasOwnProperty('password') && userData.password.match(passwordRegex) );
+		success = ( success && userData.hasOwnProperty('password') && userData.password.match(passwordRegex) != null );
+
+		console.log(userData);
+		console.log(success);
 
 		return success;
 	};
