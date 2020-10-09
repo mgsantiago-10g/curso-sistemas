@@ -26,22 +26,35 @@ class LoginModel extends EventTarget
 		super();
 	};
 
+	static getUserAccessKey()
+	{
+		
+	}
+
 	login(userData)
 	{
 		let message =
 		{
 			action:'login',
+			key: null,
 			body: userData
 		};
 
-		return fetch( './loginModel.php', { method:'POST', body:JSON.stringify(message) } );
+		return fetch( './loginModel.php', { method:'POST', body:JSON.stringify(message) } ).
+		then( response => response.json() ).
+		then( response =>
+		{
+			sessionStorage.set('key', response.key );
+			return response;
+		});
 	}
 
-	register(userData)
+	register(key, userData)
 	{
 		let message =
 		{
 			action:'register',
+			key: key,
 			body: userData
 		};
 

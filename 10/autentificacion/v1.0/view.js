@@ -43,12 +43,12 @@ class LoginView
         		<img src="./resources/avatar.png" alt="Avatar" style="width:30%" class="w3-circle w3-margin-top">
       		</div>
 
-			<form class="w3-container">
+			<form id="${this.id}loginFrm" class="w3-container">
 				<div class="w3-section">
 					<label><b>Username</b></label>
-					<input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Enter Username" name="usrname" required>
+					<input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Enter Username" name="username" required>
 					<label><b>Password</b></label>
-					<input class="w3-input w3-border" type="text" placeholder="Enter Password" name="psw" required>
+					<input class="w3-input w3-border" type="password" placeholder="Enter Password" name="password" required>
 					<button id="${this.id}btnLogin" class="w3-button w3-block w3-green w3-section w3-padding">Login</button>
 					<button id="${this.id}btnRegister" class="w3-button w3-block w3-green w3-section w3-padding">Register</button>
 				</div>
@@ -61,6 +61,14 @@ class LoginView
 		document.getElementById(this.id+'btnLogin').addEventListener('click', event => this.innerController.onLoginButtonClick(event));
 		document.getElementById(this.id+'btnRegister').addEventListener('click', event => this.innerController.onRegisterButtonClick(event));
 
+	}
+
+	getLoginFormData()
+	{
+		let formViewData = new FormData( document.getElementById( this.id +'loginFrm') );
+		let formLoginData = Object.fromEntries(formViewData);
+
+		return formLoginData;
 	}
 
 

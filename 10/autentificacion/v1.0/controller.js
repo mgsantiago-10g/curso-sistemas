@@ -27,11 +27,19 @@ class LoginViewController
 	{
 		this.innerView = view;
 		this.innerModel = model;
+
+		this.accessKey = null;
 	}
 
 	onLoginButtonClick(event)
 	{
-		window.alert('Por implementar...');
+		let data = this.innerView.getLoginFormData();
+
+		this.innerModel.login(data).then( response => 
+		{
+			this.accessKey = response.key;
+			window.alert( 'NextAccessKey:'+this.accessKey+' Response:'+ response.body );
+		});
 
 		//cortar la propagación del evento.
 		event.preventDefault();
@@ -39,9 +47,16 @@ class LoginViewController
 
 	onRegisterButtonClick(event)
 	{
-		window.alert('Por implementar...');
+		let data = this.innerView.getLoginFormData();
+		
+		this.innerModel.register(this.accessKey,data).then( response => 
+		{
+			this.accessKey = response.key;
+			window.alert( 'NextAccessKey:'+this.accessKey+' Response:'+ response.body );
+		});
 
 		//cortar la propagación del evento.
+		event.stopPropagation();
 		event.preventDefault();
 	}
 
